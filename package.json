@@ -2,9 +2,9 @@
   "name": "gig-intern-backend-1",
   "version": "1.0.0",
   "description": "This the backend server for gig intern",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "helmet": "^7.0.0",
+    "mongoose": "^7.3.1",
     "nodemon": "^2.0.22"
   }
 }
