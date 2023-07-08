@@ -33,7 +33,7 @@ const course = new mongoose.Schema({
     },
     likes: [{
         type: mongoose.SchemaType.ObjectId,
-        ref: ["intern", "admin"]
+        ref: "user"
     }]
 })
 
