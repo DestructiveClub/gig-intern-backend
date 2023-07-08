@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const intern = new mongoose.Schema({
+const user = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, "First name is required"]
@@ -18,20 +18,11 @@ const intern = new mongoose.Schema({
     },
     phoneNumber: {
         type: String,
+        unique: [true, "email must be unique"]
     },
     email: {
         type: String,
-    },
-    // skills: [{
-    //     type: mongoose.SchemaTypes.ObjectId,
-    //     ref: "skill"
-    // }],
-    // coureses: [{
-    //     type: mongoose.SchemaTypes.ObjectId,
-    //     ref: "course"
-    // }],
-    level: {
-        type: Number,
+        unique: [true, "email must be unique"]
     },
     password: {
         type: String,
@@ -39,7 +30,7 @@ const intern = new mongoose.Schema({
     },
 })
 
-intern.virtual("fullName").get(function () {
+user.virtual("fullName").get(function () {
     let fullname = this.firstName
 
     if (this.otherNames.length !== 0) fullname = fullname + " " + this.otherNames.join(" ")
@@ -49,4 +40,4 @@ intern.virtual("fullName").get(function () {
     return fullname
 })
 
-module.exports = mongoose.model("intern", intern)
+module.exports = mongoose.model("user", user)

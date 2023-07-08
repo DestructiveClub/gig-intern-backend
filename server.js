@@ -1,13 +1,12 @@
 const express = require("express");
 const app = express();
-const dotenv = require("dotenv");
+require("dotenv").config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const { dbConnect } = require("./config/dbConnect.js");
 
 const port = 5000;
-dotenv.config();
 
 // app.use(
 //   cors({
