@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const user = new mongoose.Schema({
+module.exports = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, "First name is required"]
@@ -9,16 +9,9 @@ const user = new mongoose.Schema({
         type: String,
     },
     otherNames: [String],
-    dob: {
-        type: Date,
-        required: [true, "provide date of birth"]
-    },
-    bio: {
-        type: String,
-    },
     phoneNumber: {
         type: String,
-        unique: [true, "email must be unique"]
+        unique: [true, "phone number must be unique"]
     },
     email: {
         type: String,
@@ -29,5 +22,3 @@ const user = new mongoose.Schema({
         required: [true, "password is required"]
     },
 })
-
-module.exports = mongoose.model("user", user)
