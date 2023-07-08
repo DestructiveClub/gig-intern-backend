@@ -1,16 +1,17 @@
 const mongoose = require("mongoose");
+const dotenv = require("dotenv");
 
 const dbConnect = () => {
   mongoose
     .connect("mongodb+srv://gigintern:gigintern@gigintern.avcp7rs.mongodb.net/")
     .then(() => {
-        console.log("Database Connection is Successful");
+      console.log("Database Connection is Successful");
     })
     .catch((err) => {
-        console.log(err);
+      console.log(err);
     });
 };
 
-module.exports={
-    dbConnect
-}
+module.exports = {
+  dbConnect,
+};
