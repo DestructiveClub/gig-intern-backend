@@ -8,16 +8,28 @@ const intern = new mongoose.Schema({
     lastName: {
         type: String,
     },
+    otherNames: [String],
+    dob: {
+        type: Date,
+        required: [true, "provide date of birth"]
+    },
     bio: {
         type: String,
     },
-    otherNames: [String],
     phoneNumber: {
         type: String,
     },
     email: {
         type: String,
     },
+    // skills: [{
+    //     type: mongoose.SchemaTypes.ObjectId,
+    //     ref: "skill"
+    // }],
+    // coureses: [{
+    //     type: mongoose.SchemaTypes.ObjectId,
+    //     ref: "course"
+    // }],
     level: {
         type: Number,
     },
@@ -25,8 +37,16 @@ const intern = new mongoose.Schema({
         type: String,
         required: [true, "password is required"]
     },
-    coureses: [{
-        type: mongoose.SchemaTypes.ObjectId,
-        ref: "course"
-    }],
 })
+
+intern.virtual("fullName").get(function () {
+    let fullname = this.firstName
+
+    if (this.otherNames.length !== 0) fullname = fullname + " " + this.otherNames.join(" ")
+
+    if (this.lastName) fullname = fullname + " " + this.lastName
+
+    return fullname
+})
+
+module.exports = mongoose.model("intern", intern)
