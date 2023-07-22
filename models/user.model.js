@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-module.exports = new mongoose.Schema({
+const user = new mongoose.Schema({
     firstName: {
         type: String,
         required: [true, "First name is required"]
@@ -22,3 +22,22 @@ module.exports = new mongoose.Schema({
         required: [true, "password is required"]
     },
 })
+
+class UserClass{
+    get FullName(){
+        const result = this.firstName
+    
+        for (let name of this.otherNames){
+            result = result + " " + name
+        }
+    
+        if(!this.lastName) return result
+    
+        return result + " " + this.lastName
+    }
+}
+
+module.exports = {
+    user,
+    UserClass,
+}

@@ -1,5 +1,5 @@
 const mongoose = require("mongoose")
-const user = require("./user.model")
+const {user, UserClass} = require("./user.model.js")
 
 const intern = new mongoose.Schema({
     ...user.obj,
@@ -24,5 +24,7 @@ const intern = new mongoose.Schema({
         },
     }],
 })
+
+intern.loadClass(UserClass)
 
 module.exports = mongoose.model("intern", intern)
