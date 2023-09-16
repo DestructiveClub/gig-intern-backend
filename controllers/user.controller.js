@@ -65,9 +65,10 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  res.status(200).json({
-    message: "This is the logout controller",
-  });
+  res.clearCookie("accessToken", {
+    sameSite: "none",
+    secure: true,
+  }).status(200).json({message: "User has been logged out successfully"});
 };
 
 module.exports = {
