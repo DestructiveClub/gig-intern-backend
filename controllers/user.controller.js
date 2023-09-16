@@ -8,8 +8,10 @@ const register = async (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       otherNames: req.body.otherNames,
+      phoneNumber: req.body.phoneNumber,
       email: req.body.email,
       password: bcrypt.hashSync(req.body.password, 10),
+      bio: req.body.bio,
     });
 
     const userExists = await User.findOne({ email: req.body.email });
@@ -26,16 +28,39 @@ const register = async (req, res) => {
       user: newUser,
       message: "User has been registered successfully",
     });
-    // res.redirect("/");
   } catch (err) {
     console.log(err);
   }
 };
 
 const login = async (req, res) => {
+  const { email, password } = req.body;
   try {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+      res.status(404).json({ message: "Email does not exist" });
+    }
+    const password = bcrypt.compareSync(req.body.password, user.password);
+    if (!password) {
+      res.status(400).json({
+        message: "Wrong Password!",
+      });
+    }
+
+    const token = jwt.sign(
+      {
+        id: user._id,
+      },
+      process.env.JWT
+    );
+    res
+      .status(200)
+      .cookie("accessToken", token, {
+        httpOnly: true,
+      })
+      .json({ message: "login successful", user: user });
   } catch (err) {
-    console.log(err);
+    console.log(err.message);
   }
 };
 

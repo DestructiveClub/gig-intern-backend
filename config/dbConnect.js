@@ -1,29 +1,25 @@
 const mongoose = require("mongoose");
 
-const {
-  NODE_ENV,
-  MONGO_ATLAS_URI,
-  MONGO_LOCAL_URI,
-} = process.env
+const { NODE_ENV, MONGO_ATLAS_URI, MONGO_LOCAL_URI } = process.env;
 
-let mongoUri
+let mongoUri;
 
 switch (NODE_ENV) {
   case "development":
-    mongoUri = MONGO_LOCAL_URI
-    break
+    mongoUri = MONGO_LOCAL_URI;
+    break;
 
   case "production":
-    mongoUri = MONGO_ATLAS_URI
-    break
+    mongoUri = MONGO_ATLAS_URI;
+    break;
 
   default:
-    mongoUri = MONGO_ATLAS_URI
+    mongoUri = MONGO_ATLAS_URI;
 }
 
 const dbConnect = () => {
   mongoose
-    .connect(mongoUri)
+    .connect("mongodb+srv://gigintern:gigintern@gigintern.avcp7rs.mongodb.net/")
     .then(() => {
       console.log(`Database Connection is Successful`);
     })
