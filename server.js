@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const { dbConnect } = require("./config/dbConnect.js");
 //routes
-const studentRouter = require('./routes/studentRoutes.js')
+const studentRouter = require("./routes/studentRoutes.js");
 
 const port = 5000;
 
@@ -18,11 +18,13 @@ const port = 5000;
 //   })
 // );
 
-app.use(cors());
+app.use(express.json());
+app.use(cors({origin: "https://localhost:5173", credentials: true}));
 app.use(cookieParser());
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/v1', studentRouter)
+app.use("/api/v1", studentRouter);
 
 app.listen(port || 4000, () => {
   dbConnect();
