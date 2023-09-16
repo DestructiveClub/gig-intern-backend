@@ -17,7 +17,9 @@ const port = 5000;
 //     withCredentials: true,
 //   })
 // );
-
+app.get("/", (req,res)=>{
+  res.send("The Gig intern backend server has been Deployed")
+})
 app.use(express.json());
 app.use(cors({origin: "https://localhost:5173", credentials: true}));
 app.use(cookieParser());
