@@ -19,7 +19,7 @@ switch (NODE_ENV) {
 
 const dbConnect = () => {
   mongoose
-    .connect("mongodb+srv://gigintern:gigintern@gigintern.avcp7rs.mongodb.net/")
+    .connect(process.env.MONGO)
     .then(() => {
       console.log(`Database Connection is Successful`);
     })
